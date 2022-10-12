@@ -8,7 +8,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="bg-gray-900 h-screen text-white">
         <LandingPage ToDoStore={ToDoStore} />
       </div>
     );

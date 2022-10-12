@@ -1,4 +1,4 @@
-import { action, makeObservable, observable, decorate } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 
 interface ToDoItem {
   id: number;
@@ -24,13 +24,11 @@ export class ToDoStoreImplementation {
       title,
       completed: false,
     };
-
     this.todos.push(item);
   }
 
   deleteTodo(id: number) {
-    const newTodo = this.todos.filter((todo) => todo.id !== id);
-    this.todos = newTodo;
+    this.todos = this.todos.filter((todo) => todo.id !== id);
   }
 
   toggleTodo(id: number) {
@@ -45,10 +43,5 @@ export class ToDoStoreImplementation {
     this.todos = newList;
   }
 }
-
-// decorate(ToDoStoreImplementation, {
-//   todos: observable,
-//   addTodo: action,
-// });
 
 export const ToDoStore = new ToDoStoreImplementation();

@@ -1,18 +1,3 @@
-body {
-  background-color: rgb(56, 56, 56);
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-
-  .landing-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-  }
-
-  .todo-item {
-    display: flex;
-    gap: 1rem;
-  }
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
