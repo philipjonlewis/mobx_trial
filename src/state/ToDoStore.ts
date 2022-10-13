@@ -1,4 +1,10 @@
-import { action, makeObservable, observable } from 'mobx';
+import {
+  action,
+  autorun,
+  makeAutoObservable,
+  makeObservable,
+  observable,
+} from 'mobx';
 
 interface ToDoItem {
   id: number;
@@ -7,24 +13,32 @@ interface ToDoItem {
 }
 
 export class ToDoStoreImplementation {
+  @observable
   todos: ToDoItem[] = [{ id: 1, title: 'hello', completed: false }];
 
   constructor() {
-    makeObservable(this, {
-      todos: observable,
-      addTodo: action,
-      deleteTodo: action,
-      toggleTodo: action,
-    });
+    // makeObservable(this, {
+    //   todos: observable,
+    //   addTodo: action,
+    //   deleteTodo: action,
+    //   toggleTodo: action,
+    // });
+    // makeAutoObservable(this);
+    makeObservable(this);
+    autorun(() => console.log(this.report));
   }
 
+  get report() {
+    return this.todos.length;
+  }
+
+  @action
   addTodo(title: string) {
-    const item: ToDoItem = {
+    this.todos.push({
       id: +Math.random().toFixed(4),
       title,
       completed: false,
-    };
-    this.todos.push(item);
+    });
   }
 
   deleteTodo(id: number) {
