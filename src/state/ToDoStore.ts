@@ -1,6 +1,7 @@
 import {
   action,
   autorun,
+  computed,
   makeAutoObservable,
   makeObservable,
   observable,
@@ -25,9 +26,10 @@ export class ToDoStoreImplementation {
     // });
     // makeAutoObservable(this);
     makeObservable(this);
-    autorun(() => console.log(this.report));
+    // autorun(() => console.log(this.report));
   }
 
+  @computed
   get report() {
     return this.todos.length;
   }
@@ -41,10 +43,12 @@ export class ToDoStoreImplementation {
     });
   }
 
+  @action
   deleteTodo(id: number) {
     this.todos = this.todos.filter((todo) => todo.id !== id);
   }
 
+  @action
   toggleTodo(id: number) {
     const newList = this.todos.map((todo) => {
       if (todo.id == id) {
